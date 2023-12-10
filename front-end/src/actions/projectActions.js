@@ -55,6 +55,22 @@ export const getProjectDetails = (body) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.error("Error logging in:", error);
+    console.error("Error fetching project details:", error);
+  }
+};
+
+export const deleteProject = (body) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${apiUrl}/delete`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": `${localStorage.getItem("jwtToken")}`,
+      },
+    });
+    if (response?.data?.success) {
+      toast.success("Project deleted Successfully");
+    }
+  } catch (error) {
+    console.error("Error in deleting project:", error);
   }
 };

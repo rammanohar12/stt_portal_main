@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getProjectList,
   getProjectDetails,
+  deleteProject,
 } from "../../actions/projectActions";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
@@ -74,8 +75,13 @@ const ProjectsList = () => {
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
     setSearchText(e.target.value);
+  };
+
+  const onDeleteButtonClick = async (projectDetails) => {
+    const { projectId } = projectDetails;
+    await dispatch(deleteProject({ projectId }));
+    getProjectData();
   };
 
   return (
@@ -86,7 +92,7 @@ const ProjectsList = () => {
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <Grid container>
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-                <div className="heading-box">
+                  <div className="heading-box">
                     <ViewListOutlinedIcon
                       style={{ paddingRight: "0.5rem", fontSize: "2rem" }}
                     />
@@ -174,7 +180,7 @@ const ProjectsList = () => {
                                 </Button>
                                 <Button
                                   onClick={() => {
-                                    // onDeleteButtonClick(row);
+                                    onDeleteButtonClick(row);
                                   }}
                                   className="table-action-btn"
                                 >

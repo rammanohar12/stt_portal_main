@@ -75,9 +75,34 @@ const getProjectDetails = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Error while fectching project details",
+    });
   }
 };
 
-module.exports = { createProject, getProjectList, getProjectDetails };
+const deleteProject = async (req, res) => {
+  try {
+    const { projectId } = req.body;
+    const deleteProject = await Project.deleteOne({ projectId });
+
+    res
+      .status(201)
+      .json({ success: true, message: "Project Deleted Successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Error while deleting project details",
+    });
+  }
+};
+
+module.exports = {
+  createProject,
+  getProjectList,
+  getProjectDetails,
+  deleteProject,
+};
