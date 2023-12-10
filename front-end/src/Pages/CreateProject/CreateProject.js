@@ -40,7 +40,7 @@ const CreateProject = () => {
     await dispatch(createProject(projectData));
     navigate("/projects");
   };
-  
+
   const onBackButtonClick = () => {
     navigate("/projects");
   };
@@ -78,9 +78,7 @@ const CreateProject = () => {
                 Back
               </Button>
             </Grid>
-            <div
-              style={{ width: "50%", height: "90vh", backgroundColor: "white" }}
-            >
+            <div style={{ width: "50%", backgroundColor: "white" }}>
               <div>
                 <Grid container p={5}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
