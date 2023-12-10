@@ -19,41 +19,42 @@ import Paper from "@mui/material/Paper";
 import ViewListOutlinedIcon from "@mui/icons-material/ViewListOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { useNavigate } from "react-router-dom";
-import {
-  getProjectList,
-  getProjectDetails,
-} from "../../actions/projectActions";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
+import {
+  getUsersList,
+  registerUser,
+  deleteUser,
+} from "../../actions/authActions";
+import { roleObj } from "../appConfig";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CreateUserModel from "../Models/CreateUserModel";
+import "./UserList.css";
 
-import "./ProjectList.css";
-
-const ProjectsList = () => {
+const UserList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [serachText, setSearchText] = useState("");
+  const [openCreateUserModel, setOpenCreateUserModel] = useState(false);
 
-  const projectList = useSelector((state) => state.project.projectList);
-  const totalCount = useSelector((state) => state.project.totalCount);
+  const usersList = useSelector((state) => state.auth.usersList);
+  const totalUserCount = useSelector((state) => state.auth.totalUserCount);
 
   const handleCreateProjectButtonClick = () => {
-    navigate("/create-project");
+    setOpenCreateUserModel(true);
   };
 
   const onViewButtonClick = async (row) => {
-    console.log("reow", row);
     const { projectId } = row;
-    await dispatch(getProjectDetails({ projectId }));
-    navigate(`/app/project/view/${projectId}`);
+    // await dispatch(getProjectDetails({ projectId }));
   };
 
-  const getProjectData = () => {
+  const getUsersData = () => {
     dispatch(
-      getProjectList({
+      getUsersList({
         page,
         pageSize,
         serachText,
@@ -61,11 +62,11 @@ const ProjectsList = () => {
     );
   };
 
-  useEffect(() => {
-    getProjectData();
+  useEffect((e) => {
+    getUsersData();
   }, []);
   useEffect(() => {
-    getProjectData();
+    getUsersData();
   }, [page]);
   const getRowId = (row) => row._id;
 
@@ -74,33 +75,49 @@ const ProjectsList = () => {
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
     setSearchText(e.target.value);
+  };
+
+  const handleSubmitNewUserForm = (formData) => {
+    dispatch(registerUser(formData));
+    setOpenCreateUserModel(false);
+  };
+
+  const onDeleteButtonClick = async (userDetails) => {
+    await dispatch(deleteUser({ apikey: userDetails.apikey }));
+    getUsersData();
   };
 
   return (
     <div>
+      {openCreateUserModel && (
+        <CreateUserModel
+          open={openCreateUserModel}
+          onSubmitForm={handleSubmitNewUserForm}
+          onClose={() => setOpenCreateUserModel(false)}
+        />
+      )}
       <div style={{ width: "100%" }}>
         <Grid container>
           <Grid container m={2}>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <Grid container>
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-                <div className="heading-box">
+                  <div className="heading-box">
                     <ViewListOutlinedIcon
                       style={{ paddingRight: "0.5rem", fontSize: "2rem" }}
                     />
-                    <span className="header-font">Project List</span>
+                    <span className="header-font">Users List</span>
                   </div>
                   <span className="sub-heading">
-                    Managing and Displaying Projects Information
+                    Managing and Displaying Users Information
                   </span>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                   <div className="search-box">
                     <input
                       type="text"
-                      placeholder="Search by ProjectName/Hostname..."
+                      placeholder="Search by UserName/Email ID..."
                       onChange={handleInputChange}
                     />
                     <button
@@ -108,14 +125,22 @@ const ProjectsList = () => {
                         backgroundColor: "#4B49AC",
                         padding: "0.8rem 2.5rem",
                       }}
-                      onSubmit={getProjectData}
+                      onSubmit={getUsersData}
                     >
                       Search
                     </button>
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-                  <div className="button-box">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "end",
+                      // padding: "1rem",
+                      paddingTop: "1.2rem",
+                    }}
+                  >
                     <button
                       style={{
                         backgroundColor: "#4B49AC",
@@ -123,26 +148,31 @@ const ProjectsList = () => {
                       }}
                       onClick={handleCreateProjectButtonClick}
                     >
-                      + Create Project
+                      + New User
                     </button>
                   </div>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <div className="table-conatiner">
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
+              <div
+                style={{
+                  width: "100%",
+                  backgroundColor: "white",
+                }}
+              >
                 <TableContainer component={Paper}>
                   <Table aria-label="simple table" size="small">
                     <TableHead>
                       <TableRow>
                         <TableCell style={{ fontWeight: "bold" }} align="left">
-                          ProjectName
+                          Username
                         </TableCell>
                         <TableCell style={{ fontWeight: "bold" }} align="left">
-                          Hostname
+                          Email ID
                         </TableCell>
                         <TableCell style={{ fontWeight: "bold" }} align="left">
-                          Created At
+                          Role
                         </TableCell>
                         <TableCell style={{ fontWeight: "bold" }} align="left">
                           Actions
@@ -150,16 +180,20 @@ const ProjectsList = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {projectList.map((row) => (
+                      {usersList.map((row) => (
                         <TableRow
                           key={row.name}
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
-                          <TableCell align="left">{row.projectName}</TableCell>
-                          <TableCell align="left">{row.hostname}</TableCell>
-                          <TableCell align="left">{row.createdAt}</TableCell>
+                          <TableCell align="left">
+                            {row.firstName + " " + row.lastName}
+                          </TableCell>
+                          <TableCell align="left">{row.email}</TableCell>
+                          <TableCell align="left">
+                            {roleObj[row.role]}
+                          </TableCell>
                           <TableCell align="left">
                             {
                               <div>
@@ -174,7 +208,7 @@ const ProjectsList = () => {
                                 </Button>
                                 <Button
                                   onClick={() => {
-                                    // onDeleteButtonClick(row);
+                                    onDeleteButtonClick(row);
                                   }}
                                   className="table-action-btn"
                                 >
@@ -189,11 +223,18 @@ const ProjectsList = () => {
                   </Table>
                 </TableContainer>
               </div>
-              <div className="pagination-box">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "end",
+                  marginTop: "2rem",
+                }}
+              >
                 <Pagination
                   variant="outlined"
                   shape="rounded"
-                  count={Math.ceil(totalCount / 10)}
+                  count={Math.ceil(totalUserCount / 10)}
                   page={page}
                   onChange={handleChange}
                 />
@@ -206,4 +247,4 @@ const ProjectsList = () => {
   );
 };
 
-export default ProjectsList;
+export default UserList;

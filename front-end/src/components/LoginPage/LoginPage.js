@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import "./LoginPage.css";
@@ -27,13 +27,17 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     // Implement your login logic here
     e.preventDefault();
-    const userData = { username: email, password };
-    await dispatch(loginUser(userData));
-
+    const userData = { email, password };
+    dispatch(loginUser(userData));
+    // if (isAuthenticated) {
+    //   navigate("/dashboard");
+    // }
+  };
+  useEffect(() => {
     if (isAuthenticated) {
       navigate("/dashboard");
     }
-  };
+  }, [isAuthenticated]);
   return (
     <Box>
       <Grid
@@ -42,12 +46,12 @@ const LoginPage = () => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         className="login-main-container"
       >
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
           <div className="text-container">
             <img src={speechImage} className="stt-image-container" />
           </div>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
           <div className="login-container">
             <div className="login-card">
               <Container component="main" maxWidth="xs">
@@ -58,11 +62,10 @@ const LoginPage = () => {
                     <TextField
                       margin="normal"
                       fullWidth
-                      label="Email Address"
-                      // variant="outlined"
+                      placeholder="Email Address"
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
-                      style={{ backgroundColor: "white", borderRadius: "8px" }}
+                      className="form-text-box"
                       size="small"
                       InputProps={{
                         endAdornment: (
@@ -78,13 +81,12 @@ const LoginPage = () => {
                     <TextField
                       margin="normal"
                       fullWidth
-                      label="Password"
+                      placeholder="Password"
                       type={showPassword ? "text" : "password"}
-                      // variant="outlined"
                       size="small"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
-                      style={{ backgroundColor: "white", borderRadius: "8px" }}
+                      className="form-text-box"
                       InputProps={{
                         endAdornment: (
                           <InputAdornment
@@ -98,30 +100,12 @@ const LoginPage = () => {
                         ),
                       }}
                     />
-                    <button
-                      className="submit-button"
-                      variant="contained"
-                      onClick={handleLogin}
-                    >
+                    <button className="submit-button" onClick={handleLogin}>
                       Log in
                     </button>
                   </form>
                 </div>
                 <div className="login-sub-card">
-                  {/* <button
-                    className="submit-button-1"
-                    variant="contained"
-                    onClick={handleLogin}
-                  >
-                    Register
-                  </button>
-                  <button
-                      className="submit-button-1"
-                      variant="contained"
-                      onClick={handleLogin}
-                    >
-                      Forgot Password
-                    </button> */}
                   <a href="/register">Register</a>
                   <a href="/forgot-password">Forgot Password</a>
                 </div>

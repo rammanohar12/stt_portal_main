@@ -12,17 +12,19 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import sperAdminMenu from "../../Pages/Menu/superAdminMenu";
 import { useNavigate } from "react-router-dom";
 import { setNavItem } from "../../actions/navActions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 export default function SideNavbar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [selected, setSelectedButton] = React.useState("dashboard");
 
   const selectedNavItem = useSelector((state) => state.navbar.selectedNavItem);
 
   const onLogoutButtonClick = () => {
-    localStorage.clear("jwtToken");
+    dispatch(logoutUser());
     navigate("/");
   };
 
@@ -45,18 +47,27 @@ export default function SideNavbar() {
     >
       <List style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         {sperAdminMenu.map((item, index) => (
-          <ListItem key={item.key} sx={{ display: "block", padding: "0.8rem" }}>
+          <ListItem
+            key={item.key}
+            sx={{ display: "block", padding: "0.8rem" }}
+            onClick={() => {
+              setSelectedButton(item.key);
+              handleNavButtonClick(item.key);
+              navigate(item.link);
+            }}
+          >
             <ListItemButton
               sx={{
                 backgroundColor: selected === item.key ? "#4B49AC" : "white",
                 borderRadius: "5px",
                 boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
                 color: selected === item.key ? "white" : "black",
-              }}
-              onClick={() => {
-                setSelectedButton(item.key);
-                handleNavButtonClick(item.key);
-                navigate(item.link);
+                ":hover": {
+                  backgroundColor: selected === item.key ? "#4B49AC" : "white",
+                  borderRadius: "5px",
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                  color: selected === item.key ? "white" : "black",
+                },
               }}
             >
               <ListItemIcon
@@ -80,6 +91,12 @@ export default function SideNavbar() {
               backgroundColor: "#4B49AC",
               borderRadius: "5px",
               color: "white",
+              ":hover": {
+                backgroundColor: "#4B49AC",
+                borderRadius: "5px",
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                color: "white",
+              },
             }}
           >
             <ListItemIcon

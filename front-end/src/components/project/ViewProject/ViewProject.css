@@ -59,3 +59,22 @@
   font-size: 0.9rem;
   margin-right: 1rem;
 }
+.back-button {
+  background-color: white;
+  padding: 0.5rem;
+  align-items: center;
+  display: flex;
+
+  color: #909090;
+  border-radius: 4px;
+}
+
+.back-button{
+  background-color: #4b49ac;
+  color: white;
+  font-size: 0.6rem;
+}
+.arrow-icon{
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}

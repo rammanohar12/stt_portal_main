@@ -19,9 +19,11 @@ import { useParams } from "react-router-dom";
 import { getProjectDetails } from "../../../actions/projectActions";
 import { reverselanguageMap } from "../../appConfig";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 const ViewProject = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [customWidget, setCustomWidget] = useState(false);
   const [isCopiedToClipBoard, setIsCopiedToClipBoard] = useState(false);
 
@@ -70,35 +72,45 @@ const ViewProject = () => {
           dangerouslySetInnerHTML={{ __html: scriptTag.trim() }}
         />
         <div
-          style={{ marginBottom: "3rem" }}
+          style={{ marginBottom: "5rem" }}
           dangerouslySetInnerHTML={{ __html: anuvadakInitFnCall.trim() }}
         />
       </div>
     );
   };
 
+  const onBackButtonClick = () => {
+    navigate("/projects");
+  };
+
   useEffect(() => {
     dispatch(getProjectDetails({ projectId }));
   }, []);
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <SideNavbar />
-      <div style={{ width: "100%" }}>
+    <div>
+      <div>
         <Grid container>
           <Grid container m={1} spacing={2}>
-            {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <div
-                style={{
-                  padding: "0.5rem 0rem",
-                  backgroundColor: "white",
-                  paddingLeft: "0.5rem",
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <Button
+                sx={{
+                  backgroundColor: "#4b49ac",
+                  color: "white",
+                  fontSize: "0.6rem",
+                  ":hover": {
+                    backgroundColor: "#4b49ac",
+                    color: "white",
+                  },
                 }}
+                size="small"
+                onClick={onBackButtonClick}
               >
-                <span>
-                  <ArrowBackIcon />
-                </span>
-              </div>
-            </Grid> */}
+                <ArrowBackIcon
+                  sx={{ marginRight: "0.3rem", fontSize: "1rem" }}
+                />
+                Back
+              </Button>
+            </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <div
                 style={{
@@ -122,33 +134,13 @@ const ViewProject = () => {
                   <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <div className="details-item">
                       <span className="details-item-head"> CreateAt:</span>
-                      <span>{projectDetails.createAt}</span>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <div className="details-item">
-                      <span className="details-item-head">
-                        {" "}
-                        Source Language:
-                      </span>
-                      <span>
-                        {reverselanguageMap[projectDetails.sourceLanguage]}
-                      </span>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <div className="details-item">
-                      <span className="details-item-head">
-                        {" "}
-                        Target Language:
-                      </span>
-                      <span>{projectDetails.targetLanguage}</span>
+                      <span>{projectDetails.createdAt}</span>
                     </div>
                   </Grid>
                 </Grid>
               </div>
             </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={3}>
               <div style={{ backgroundColor: "white", padding: "1rem" }}>
                 <Grid container>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

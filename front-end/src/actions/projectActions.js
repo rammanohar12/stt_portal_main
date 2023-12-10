@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const apiUrl = "http://localhost:5000/api/project";
 
@@ -12,7 +13,7 @@ export const createProject = (projectData) => async (dispatch) => {
     });
 
     if (response?.data?.success) {
-      console.log(response);
+      toast.success("Project Created Successfully");
     }
   } catch (error) {
     console.error("Error logging in:", error);
