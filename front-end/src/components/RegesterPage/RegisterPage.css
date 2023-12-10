@@ -27,10 +27,10 @@
   /* width: 90%;
   height: 70%; */
   /* background-color: #4f52ff;  */
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   background-color: white;
-  margin: 10rem 0rem;
+  margin: 6rem 0rem;
 }
 
 .login-card-inner {
@@ -44,7 +44,7 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .submit-button {
   margin-top: 16px;
@@ -55,6 +55,7 @@
   color: white;
   cursor: pointer;
   padding: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .login-sub-card {
@@ -82,4 +83,27 @@
 
 .login-sub-card {
   margin-bottom: 3rem;
+}
+
+.form-text-box{
+  background-color: white;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.phone-field-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.otp-btn{
+  margin-top: 1rem;
+  padding: 0.7rem;
+  background-color: #4f52ff;
+}
+
+.bottom-box{
+  margin-bottom: 2rem;
 }

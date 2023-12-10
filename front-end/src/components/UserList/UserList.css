@@ -1,0 +1,26 @@
+.table-action-btn {
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 0.5rem;
+  color: #4b49ac;
+  margin-right: 1rem;
+}
+
+.header-font {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.sub-heading {
+  font-size: 0.6rem;
+  color: #4b49ac;
+  letter-spacing: 0.3px;
+}
+
+.heading-box {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+  color: #4b49ac;
+}

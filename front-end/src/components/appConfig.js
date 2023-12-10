@@ -104,3 +104,16 @@ export const reverselanguageMap = {
   dv: "dhivehi",
   iw: "hebrew",
 };
+
+export const roleObj = {
+  superAdmin: "Super Admin",
+  deliveryManager: " Delivery Manager",
+  collaborator: "Collaborator",
+  organisationAdmin: "Organisation",
+  freeOrgAdmin: "Organisation(Free)",
+  translationAdmin: "Translation Admin",
+  lokSabhaAdmin: "Loksabha Admin",
+  rajyaSabhaAdmin: "Rajyasabha Admin",
+  lokSabhaTranslator: "Loksabha Translator",
+  rajyaSabhaTranslator: "Rajyasabha Translator",
+};

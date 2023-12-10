@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SideNavbar from "../../components/SideNavbar/SideNavbar";
-import { Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography, Button } from "@mui/material";
 import { allLanguageMap } from "../../components/appConfig";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -10,8 +10,11 @@ import Select from "@mui/material/Select";
 import "./CreateProject.css";
 import { createProject } from "../../actions/projectActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const CreateProject = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [projectName, setProjectName] = useState("");
   const [hostname, setHostname] = useState("");
@@ -34,12 +37,16 @@ const CreateProject = () => {
       projectName,
       hostname,
     };
-    dispatch(createProject(projectData));
+    await dispatch(createProject(projectData));
+    navigate("/projects");
+  };
+  
+  const onBackButtonClick = () => {
+    navigate("/projects");
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <SideNavbar />
+    <div>
       <div style={{ width: "100%" }}>
         <Grid container>
           <Grid
@@ -51,6 +58,26 @@ const CreateProject = () => {
               justifyContent: "center",
             }}
           >
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mb={2}>
+              <Button
+                sx={{
+                  backgroundColor: "#4b49ac",
+                  color: "white",
+                  fontSize: "0.6rem",
+                  ":hover": {
+                    backgroundColor: "#4b49ac",
+                    color: "white",
+                  },
+                }}
+                size="small"
+                onClick={onBackButtonClick}
+              >
+                <ArrowBackIcon
+                  sx={{ marginRight: "0.3rem", fontSize: "1rem" }}
+                />
+                Back
+              </Button>
+            </Grid>
             <div
               style={{ width: "50%", height: "90vh", backgroundColor: "white" }}
             >

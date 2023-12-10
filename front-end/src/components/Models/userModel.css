@@ -1,0 +1,13 @@
+.submit-button,
+.submit-button:hover {
+  color: white;
+  background-color: #4f52ff;
+  padding: 0.5rem 2rem;
+}
+
+.model-header-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #4b49ac;
+}

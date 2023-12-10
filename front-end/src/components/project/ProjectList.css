@@ -19,7 +19,7 @@ input {
   border-radius: 4px;
   font-size: 14px;
 }
-input:hover{
+input:hover {
   border: none;
 }
 
@@ -35,4 +35,31 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.pagination-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-top: 2rem;
+}
+
+.table-conatiner {
+  width: 100%;
+  background-color: white;
+}
+
+.button-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  padding: 1.2rem;
+}
+
+
+.head-main-box{
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  color: #4B49AC;
 }
