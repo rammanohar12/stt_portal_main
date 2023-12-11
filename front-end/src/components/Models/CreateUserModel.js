@@ -51,7 +51,7 @@ const CreateUserModel = ({ open, onSubmitForm, onClose }) => {
       open={open}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      style={{overflow:'auto'}}
+      style={{ overflow: "auto" }}
     >
       <Box sx={{ ...style }}>
         <div className="model-header-box">
@@ -158,9 +158,13 @@ const CreateUserModel = ({ open, onSubmitForm, onClose }) => {
             <Grid item xs={12} sm={6} md={12} lg={12} xl={12} mt={3} mb={3}>
               <div>
                 <Button
+                  fullWidth
                   variant="contained"
-                  className="submit-button"
                   onClick={handleSubmit}
+                  sx={{
+                    backgroundColor: "#4b49ac",
+                    ":hover": { backgroundColor: "#4b49ac" },
+                  }}
                 >
                   Submit
                 </Button>
