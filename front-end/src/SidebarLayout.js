@@ -3,7 +3,7 @@ import SideNavbar from "./components/SideNavbar/SideNavbar";
 
 const SidebarLayout = () => (
   <div className="main-continer">
-    <div>
+    <div style={{height:'100vh'}}>
       <SideNavbar />
     </div>
     <div style={{width:"100%"}}>

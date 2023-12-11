@@ -19,7 +19,9 @@ const CreateProject = () => {
   const [projectName, setProjectName] = useState("");
   const [hostname, setHostname] = useState("");
   const [language, setLanguage] = useState("");
-  const [elementName, setElementName] = useState("");
+  const [domain, setDomain] = useState("");
+  const [apikey, setApikey] = useState("");
+  const [appId, setAppId] = useState("");
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -36,6 +38,10 @@ const CreateProject = () => {
     const projectData = {
       projectName,
       hostname,
+      domain,
+      apikey,
+      appId,
+      language
     };
     await dispatch(createProject(projectData));
     navigate("/projects");
@@ -128,7 +134,7 @@ const CreateProject = () => {
                         <span
                           style={{ fontSize: "0.8rem", marginBottom: "0.5rem" }}
                         >
-                          Hostname:
+                          HostName:
                         </span>
                         <TextField
                           fullWidth
@@ -141,17 +147,51 @@ const CreateProject = () => {
                           }}
                         />
                       </Grid>
-                      {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
                         <span
                           style={{ fontSize: "0.8rem", marginBottom: "0.5rem" }}
                         >
-                          Element Name:
+                          Apikey:
                         </span>
                         <TextField
                           fullWidth
                           size="small"
-                          onChange={(e) => setElementName(e.target.value)}
-                          value={elementName}
+                          onChange={(e) => setApikey(e.target.value)}
+                          value={apikey}
+                          style={{
+                            backgroundColor: "white",
+                            borderRadius: "8px",
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
+                        <span
+                          style={{ fontSize: "0.8rem", marginBottom: "0.5rem" }}
+                        >
+                          App ID:
+                        </span>
+                        <TextField
+                          fullWidth
+                          size="small"
+                          onChange={(e) => setAppId(e.target.value)}
+                          value={appId}
+                          style={{
+                            backgroundColor: "white",
+                            borderRadius: "8px",
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
+                        <span
+                          style={{ fontSize: "0.8rem", marginBottom: "0.5rem" }}
+                        >
+                          Domain:
+                        </span>
+                        <TextField
+                          fullWidth
+                          size="small"
+                          onChange={(e) => setDomain(e.target.value)}
+                          value={domain}
                           style={{
                             backgroundColor: "white",
                             borderRadius: "8px",
@@ -184,10 +224,10 @@ const CreateProject = () => {
                             ))}
                           </Select>
                         </div>
-                      </Grid> */}
+                      </Grid>
                       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
                         <button
-                          style={{ backgroundColor: "#4B49AC" }}
+                          style={{ backgroundColor: "#4B49AC" ,width:'100%'}}
                           onClick={handleSubmitCreateProjectForm}
                         >
                           Create Project

@@ -79,7 +79,7 @@ const ViewProject = () => {
           dangerouslySetInnerHTML={{ __html: scriptTag.trim() }}
         />
         <div
-          style={{ marginBottom: "5rem" }}
+          style={{ marginBottom: "3rem" }}
           dangerouslySetInnerHTML={{ __html: anuvadakInitFnCall.trim() }}
         />
       </div>
