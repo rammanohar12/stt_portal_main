@@ -42,6 +42,13 @@ const ViewProject = () => {
       })
   }
   init();
+  const search = async () => {
+    const text = await voiceSearch.voiceSearch({
+        language: 'en'
+    })
+    document.querySelector('.search-input').value = text;
+}
+
 `);
   };
 
