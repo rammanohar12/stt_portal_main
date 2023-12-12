@@ -5,7 +5,7 @@ const createProject = async (req, res) => {
   try {
     const { projectName, domain, apikey, appId, language, hostname } = req.body;
 
-    const existingProject = await Project.findOne({ domain });
+    const existingProject = await Project.findOne({ hostname });
 
     const createdBy = req.user.apikey;
 
