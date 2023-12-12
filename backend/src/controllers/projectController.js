@@ -24,7 +24,7 @@ const createProject = async (req, res) => {
       projectId,
       language,
       hostname,
-      createdBy
+      createdBy,
     });
 
     await newProject.save();
@@ -104,9 +104,64 @@ const deleteProject = async (req, res) => {
   }
 };
 
+const verifySTTConnection = async (req, res) => {
+  try {
+    const { projectId, hostname } = req.body;
+    const data = await Project.find({ projectId });
+
+    const projectDetails = data[0];
+
+    const projectConfig = {
+      apikey: "",
+      appId: "",
+      domain: "",
+      language: "",
+    };
+
+    if (projectDetails && !(projectDetails.hostname === hostname)) {
+      return res.status(401).json({
+        success: false,
+        verification: false,
+        message: "Hostname verification failed",
+      });
+    }
+
+    if (projectDetails && projectDetails.apikey) {
+      projectConfig.apikey = projectDetails.apikey;
+    }
+
+    if (projectDetails && projectDetails.appId) {
+      projectConfig.appId = projectDetails.appId;
+    }
+
+    if (projectDetails && projectDetails.domain) {
+      projectConfig.domain = projectDetails.domain;
+    }
+
+    if (projectDetails && projectDetails.language) {
+      projectConfig.language = projectDetails.language;
+    }
+
+    res.status(201).json({
+      success: true,
+      verification: true,
+      projectConfig,
+      message: "Hostname verified successfully",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      verification: false,
+      message: "Error in verification",
+    });
+  }
+};
+
 module.exports = {
   createProject,
   getProjectList,
   getProjectDetails,
   deleteProject,
+  verifySTTConnection,
 };
