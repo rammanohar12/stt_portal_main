@@ -3,9 +3,11 @@ const Project = require("../models/projectSchema");
 
 const createProject = async (req, res) => {
   try {
-    const { projectName, domain, apikey, appId, language,hostname } = req.body;
+    const { projectName, domain, apikey, appId, language, hostname } = req.body;
 
     const existingProject = await Project.findOne({ domain });
+
+    const createdBy = req.user.apikey;
 
     if (existingProject) {
       return res.status(400).json({ message: "Project already exists" });
@@ -21,7 +23,8 @@ const createProject = async (req, res) => {
       appId,
       projectId,
       language,
-      hostname
+      hostname,
+      createdBy
     });
 
     await newProject.save();

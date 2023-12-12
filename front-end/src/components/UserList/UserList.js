@@ -42,6 +42,7 @@ const UserList = () => {
 
   const usersList = useSelector((state) => state.auth.usersList);
   const totalUserCount = useSelector((state) => state.auth.totalUserCount);
+  const userDetails = useSelector((state) => state.auth.userDetails);
 
   const handleCreateProjectButtonClick = () => {
     setOpenCreateUserModel(true);
@@ -132,25 +133,27 @@ const UserList = () => {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "end",
-                      // padding: "1rem",
-                      paddingTop: "1.2rem",
-                    }}
-                  >
-                    <button
+                  {userDetails?.role === "superAdmin" && (
+                    <div
                       style={{
-                        backgroundColor: "#4B49AC",
-                        padding: "0.8rem 1.8rem",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "end",
+                        // padding: "1rem",
+                        paddingTop: "1.2rem",
                       }}
-                      onClick={handleCreateProjectButtonClick}
                     >
-                      + New User
-                    </button>
-                  </div>
+                      <button
+                        style={{
+                          backgroundColor: "#4B49AC",
+                          padding: "0.8rem 1.8rem",
+                        }}
+                        onClick={handleCreateProjectButtonClick}
+                      >
+                        + New User
+                      </button>
+                    </div>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
