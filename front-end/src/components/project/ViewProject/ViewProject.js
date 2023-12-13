@@ -36,6 +36,7 @@ const ViewProject = () => {
     return beautify(`const init = async () => {
       const text = await voiceSearch.initSearch({
           projectId: "${projectId}",
+          selector:".selector_name",
           cb: (text) => {
               document.querySelector('.search-input').value = text;
           }
