@@ -35,7 +35,7 @@ const ViewProject = () => {
   let initFnCallSnippet = () => {
     return beautify(`const init = async () => {
       const text = await voiceSearch.initSearch({
-          project: "${projectId}",
+          projectId: "${projectId}",
           cb: (text) => {
               document.querySelector('.search-input').value = text;
           }

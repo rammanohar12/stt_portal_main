@@ -216,7 +216,7 @@ const CreateProject = () => {
                             {Object.keys(allLanguageMap).map((lang) => (
                               <MenuItem
                                 key={allLanguageMap[lang]}
-                                value={lang}
+                                value={allLanguageMap[lang]}
                                 // style={getStyles(name, personName, theme)}
                               >
                                 {lang}
