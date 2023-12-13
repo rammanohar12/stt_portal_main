@@ -35,7 +35,7 @@ const LoginPage = () => {
   };
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard");
+      navigate("/projects");
     }
   }, [isAuthenticated]);
   return (
@@ -106,8 +106,8 @@ const LoginPage = () => {
                   </form>
                 </div>
                 <div className="login-sub-card">
-                  <a href="/register">Register</a>
-                  <a href="/forgot-password">Forgot Password</a>
+                  {/* <a href="/register">Register</a> */}
+                  {/* <a href="/forgot-password">Forgot Password</a> */}
                 </div>
               </Container>
             </div>

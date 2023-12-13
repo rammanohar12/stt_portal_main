@@ -18,7 +18,7 @@ const CreateProject = () => {
   const dispatch = useDispatch();
   const [projectName, setProjectName] = useState("");
   const [hostname, setHostname] = useState("");
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState([]);
   const [domain, setDomain] = useState("");
   const [apikey, setApikey] = useState("");
   const [appId, setAppId] = useState("");
@@ -41,7 +41,7 @@ const CreateProject = () => {
       domain,
       apikey,
       appId,
-      language
+      languages:language,
     };
     await dispatch(createProject(projectData));
     navigate("/projects");
@@ -206,18 +206,19 @@ const CreateProject = () => {
                         </span>
                         <div>
                           <Select
-                            labelId="demo-multiple-name-label"
-                            id="demo-multiple-name"
                             fullWidth
                             size="small"
-                            onChange={(e) => setLanguage(e.target.value)}
+                            multiple
+                            onChange={(e) => {
+                              setLanguage(e.target.value);
+                            }}
+                            value={language}
                             MenuProps={MenuProps}
                           >
                             {Object.keys(allLanguageMap).map((lang) => (
                               <MenuItem
                                 key={allLanguageMap[lang]}
                                 value={allLanguageMap[lang]}
-                                // style={getStyles(name, personName, theme)}
                               >
                                 {lang}
                               </MenuItem>
@@ -227,7 +228,7 @@ const CreateProject = () => {
                       </Grid>
                       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} mt={2}>
                         <button
-                          style={{ backgroundColor: "#4B49AC" ,width:'100%'}}
+                          style={{ backgroundColor: "#4B49AC", width: "100%" }}
                           onClick={handleSubmitCreateProjectForm}
                         >
                           Create Project

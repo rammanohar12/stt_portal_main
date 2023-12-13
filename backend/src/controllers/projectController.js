@@ -109,7 +109,10 @@ const deleteProject = async (req, res) => {
 
 const verifySTTConnection = async (req, res) => {
   try {
-    const { projectId, hostname } = req.body;
+    const projectId = req.headers["projectid"];
+    const hostname = req.headers["hostname"];
+    const language = req.headers["language"];
+
     const data = await Project.find({ projectId });
 
     const projectDetails = data[0];
@@ -118,7 +121,6 @@ const verifySTTConnection = async (req, res) => {
       apikey: "",
       appId: "",
       domain: "",
-      language: "",
     };
 
     if (projectDetails && !(projectDetails.hostname === hostname)) {
@@ -126,6 +128,14 @@ const verifySTTConnection = async (req, res) => {
         success: false,
         verification: false,
         message: "Hostname verification failed",
+      });
+    }
+
+    if (projectDetails && !(projectDetails.languages.includes(language))) {
+      return res.status(401).json({
+        success: false,
+        verification: false,
+        message: "Language verification failed",
       });
     }
 
@@ -141,15 +151,11 @@ const verifySTTConnection = async (req, res) => {
       projectConfig.domain = projectDetails.domain;
     }
 
-    if (projectDetails && projectDetails.language) {
-      projectConfig.language = projectDetails.language;
-    }
-
     res.status(201).json({
       success: true,
       verification: true,
       projectConfig,
-      message: "Hostname verified successfully",
+      message: "Verification successfull",
     });
   } catch (err) {
     console.log(err);

@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import SidebarLayout from "./SidebarLayout.js";
 import UserList from "./components/UserList/UserList.js";
 import { ToastContainer } from "react-toastify";
+import UserProfile from "./components/UserProfile/UserProfile.js";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
@@ -40,7 +41,7 @@ const App = () => {
         />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/register" exact element={<Register />} />
+          {/* <Route path="/register" exact element={<Register />} /> */}
           <Route element={<SidebarLayout />}>
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/projects" exact element={<ProjectsList />} />
@@ -51,6 +52,7 @@ const App = () => {
               element={<ViewProject />}
             />
             <Route path="/users" exact element={<UserList />} />
+            <Route path="/app/user/view/:id" exact element={<UserProfile />} />
           </Route>
         </Routes>
       </div>

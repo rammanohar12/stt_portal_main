@@ -7,7 +7,7 @@ const projectSchema = new mongoose.Schema({
   apikey: { type: String, required: true },
   appId: { type: String, required: true },
   projectId: { type: String, required: true },
-  language: { type: String, required: true },
+  languages: { type: Array, required: true },
   createdBy: { type: String, required: true },
   createdAt: { type: Date },
 });

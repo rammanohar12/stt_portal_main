@@ -11,13 +11,13 @@ const menu = [
     icon: <AccountCircleOutlinedIcon/>,
     subMenu: []
   },
-  {
-    name: "Dashboard",
-    key: "/dashboard",
-    link: "/dashboard",
-    subMenu: [],
-    icon: <DashboardCustomizeOutlinedIcon/>
-  },
+  // {
+  //   name: "Dashboard",
+  //   key: "/dashboard",
+  //   link: "/dashboard",
+  //   subMenu: [],
+  //   icon: <DashboardCustomizeOutlinedIcon/>
+  // },
   {
     name: "Projects",
     key: "projects",

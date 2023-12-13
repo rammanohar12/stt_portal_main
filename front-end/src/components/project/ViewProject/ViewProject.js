@@ -37,6 +37,7 @@ const ViewProject = () => {
       const text = await voiceSearch.initSearch({
           projectId: "${projectId}",
           selector:".selector_name",
+          language: 'en',
           cb: (text) => {
               document.querySelector('.search-input').value = text;
           }
@@ -173,7 +174,7 @@ const ViewProject = () => {
                       localization
                     </p>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={12} lg={2} xl={2}>
+                  {/* <Grid item xs={12} sm={12} md={12} lg={2} xl={2}>
                     Custom Widget
                     <Checkbox
                       style={{ marginLeft: "10px" }}
@@ -183,7 +184,7 @@ const ViewProject = () => {
                         MIsCopiedToClipBoard(false);
                       }}
                     />
-                  </Grid>
+                  </Grid> */}
 
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <pre id="snippet" className="code" style={{ border: 0 }}>
