@@ -130,19 +130,25 @@ const ViewProject = () => {
                   <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <div className="details-item">
                       <span className="details-item-head">Project Name :</span>
-                      <span>{projectDetails.projectName}</span>
+                      <span className="details-item-val">{projectDetails.projectName}</span>
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <div className="details-item">
                       <span className="details-item-head">Hostname :</span>
-                      <span>{projectDetails.hostname}</span>
+                      <span className="details-item-val">{projectDetails.hostname}</span>
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <div className="details-item">
                       <span className="details-item-head"> CreateAt:</span>
-                      <span>{projectDetails.createdAt}</span>
+                      <span className="details-item-val">{projectDetails.createdAt}</span>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                    <div className="details-item">
+                      <span className="details-item-head"> Domain:</span>
+                      <span className="details-item-val">{projectDetails.domain}</span>
                     </div>
                   </Grid>
                 </Grid>

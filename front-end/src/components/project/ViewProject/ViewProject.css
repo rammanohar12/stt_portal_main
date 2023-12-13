@@ -48,7 +48,7 @@
 .details-item {
   display: flex;
   flex-direction: row;
-  padding: 2rem;
+  padding: 2rem 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: white;
   /* justify-content: space-between; */
@@ -56,8 +56,8 @@
 
 .details-item-head {
   font-weight: bold;
-  font-size: 0.9rem;
-  margin-right: 1rem;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
 }
 .back-button {
   background-color: white;
@@ -77,4 +77,8 @@
 .arrow-icon{
   font-size: 1rem;
   margin-right: 0.3rem;
+}
+
+.details-item-val{
+  font-size: 0.8rem;
 }

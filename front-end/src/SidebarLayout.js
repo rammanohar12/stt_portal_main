@@ -6,7 +6,7 @@ const SidebarLayout = () => (
     <div style={{height:'100vh'}}>
       <SideNavbar />
     </div>
-    <div style={{width:"100%"}}>
+    <div style={{width:"100%",height:'100vh',overflow:'auto'}}>
       <Outlet />
     </div>
   </div>

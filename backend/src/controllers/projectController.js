@@ -51,7 +51,8 @@ const getProjectList = async (req, res) => {
 
     const projectList = await Project.find(query)
       .skip((page - 1) * pageSize)
-      .limit(pageSize);
+      .limit(pageSize)
+      .sort({ createdAt: -1 });
 
     const totalCount = await Project.countDocuments({});
 
