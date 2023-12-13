@@ -10,7 +10,9 @@ const createProject = async (req, res) => {
     const createdBy = req.user.apikey;
 
     if (existingProject) {
-      return res.status(400).json({ message: "Project already exists" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Project already exists" });
     }
 
     const projectId = uuidv4();

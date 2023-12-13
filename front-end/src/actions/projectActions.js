@@ -14,6 +14,8 @@ export const createProject = (projectData) => async (dispatch) => {
 
     if (response?.data?.success) {
       toast.success("Project Created Successfully");
+    } else {
+      toast.error(response?.data?.message);
     }
   } catch (error) {
     console.error("Error logging in:", error);
