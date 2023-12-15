@@ -110,7 +110,7 @@ const deleteProject = async (req, res) => {
 const verifySTTConnection = async (req, res) => {
   try {
     const projectId = req.headers["projectid"];
-    const hostname = req.headers["hostname"];
+    const origin = req.headers["origin"];
     const language = req.headers["language"];
 
     const data = await Project.find({ projectId });
@@ -131,7 +131,7 @@ const verifySTTConnection = async (req, res) => {
       domain: "",
     };
 
-    if (projectDetails && !(projectDetails.hostname === hostname)) {
+    if (projectDetails && !(projectDetails.origin === origin)) {
       return res.status(401).json({
         success: false,
         verification: false,
