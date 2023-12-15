@@ -115,6 +115,14 @@ const verifySTTConnection = async (req, res) => {
 
     const data = await Project.find({ projectId });
 
+    if (data.length == 0) {
+      return res.status(401).json({
+        success: false,
+        verification: false,
+        message: "Project verification failed",
+      });
+    }
+
     const projectDetails = data[0];
 
     const projectConfig = {
@@ -131,7 +139,7 @@ const verifySTTConnection = async (req, res) => {
       });
     }
 
-    if (projectDetails && !(projectDetails.languages.includes(language))) {
+    if (projectDetails && !projectDetails.languages.includes(language)) {
       return res.status(401).json({
         success: false,
         verification: false,
